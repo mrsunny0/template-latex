@@ -1,0 +1,77 @@
+%===========================================================================%
+%                                 PREAMBLE
+%===========================================================================%
+\ProvidesPackage{preamble}
+
+%-------------------%
+% Document encoding %
+%-------------------%
+\usepackage[english]{babel}
+\usepackage{cmap}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+%---------------%
+% Graphics Path %
+%---------------%
+\usepackage[space]{grffile} % ignore white spares in pathnames
+
+%-----------%
+% Essential %
+%-----------%
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{mathtools}		% for obscure math commands
+\usepackage{amssymb}		% for obscure math symbols
+\usepackage{amsfonts} 		% for obscure math fonts
+\usepackage{float}			% [H] float command
+\usepackage{subcaption} 	% for subfigure captions
+\usepackage{sidecap}		% for figure side captions
+\usepackage{makecell}		% formatting cells within tabular with \thead and \makecell
+\usepackage{multicol} 		% for tabular \multicolumn
+\usepackage{multirow} 		% for tabular - \multirow
+\usepackage{import}			% import subfiles
+\usepackage{longtable}		% tables extend multiple pages \begin{longtable}{}
+\usepackage{ltablex}		% provides tabularx, page breaking capabilities
+\usepackage{tabularx}		% allows width to be specified
+\usepackage{rotating}		% sideways and rotate package
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}	% urls that linebreak, but this breaks other packages like xr
+\usepackage{bookmark}   % loads hyperref, however will adjust pdf bookmarking
+% \usepackage{cite}			% exernal .bib referencing: NO LONGER NEEDED WITH BIBLATEX
+
+%---------%
+% Add-ons %
+%---------%
+\usepackage[colorinlistoftodos]{todonotes}  % add to-do notes with customizability
+\usepackage{fancyhdr}		% Fancy headers
+\usepackage{setspace}		% double or set spacing
+\usepackage{wrapfig}		% wrap figures around text
+\usepackage{booktabs}		% top, mid and bottom rule for tables
+\usepackage[version=4]{mhchem}	% for writing chemical formulas, use \ce{}
+\usepackage{rotating}		% writing vertically using \begin{turn} ... \end{turn}
+\usepackage{amssymb}		% random symbols like checkmarks
+\usepackage{enumitem}		% modifications to enumerated list
+\usepackage{siunitx}		% include SI units in math modeSI units package
+\usepackage{adjustbox}		% rescale tables to fit page
+\usepackage{changepage}   	% for the adjustwidth environment
+\usepackage{cleveref}		% multi-clever referencing
+\usepackage{pdfpages}		% add external pdf module
+\usepackage{enumitem}		% enumerate referenced items
+\usepackage[]{algorithm2e}	% writing algorithms
+\usepackage{empheq}			% make pretty boxes around equations
+\usepackage[hang,flushmargin,bottom]{footmisc} 	% foot notes go on the bottom and no indent
+\usepackage{seqsplit}   % split long DNA sequences
+\usepackage{colortbl}  % color highlights for table
+% \usepackage[dvipsnames]{xcolor}
+
+%--------------%
+% bibliography %
+%--------------%
+% setting up biblatex and biber: https://tex.stackexchange.com/questions/44040/biblatex-biber-texmaker-miktex
+\usepackage{csquotes} % for biber to render quotes correctly
+
+%---------%
+% Testing %
+%---------%
+\usepackage{lipsum}
+\usepackage{blindtext}
