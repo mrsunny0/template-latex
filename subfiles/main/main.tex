@@ -41,21 +41,6 @@
 %   }
 % \makeatother
 
-% Because of subfiles, create a new macro to encapsulate relative path structure
-% for each subfile document
-% \newcommand{\includepaths}{
-%   % add graphics path
-%   \graphicspath{%
-%     {../graphics/}
-%   }
-%
-%   % add input paths
-%   \makeatletter
-%     \def\input@path{
-%       {../tables/}
-%     }
-%   \makeatother
-% }
 % The above macro has some issue if compiled in the main file, as there article
 % are duplicate file paths and conflicts. Rather, create a name macro for the new
 % path and use it in the subfiles
