@@ -1,0 +1,139 @@
+%===========================================================================%
+%                              CUSTOIMZATIONS
+%===========================================================================%
+\ProvidesPackage{custom}
+
+%---------------------%
+% Document parameters %
+%---------------------%
+%% do not change, changes should be done in the class
+% \setlength{\parindent}{12pt}
+% \usepackage[left=1in,top=1in,right=1in,bottom=1in,bindingoffset=0cm]{geometry}
+% use 'showframe' as an argument to see margin lines
+% \usepackage[margin=0.8in, bindingoffset=0cm]{geometry}
+% note that 1in margins actually => 1.26in
+
+%% Page numbering
+% page numbering can be roman (e.g. i, ii, iii, iv), alpha (a, b, c, d)
+% or arabic (1,2,3,4). Change the below option to roman for front matter text
+% such as preface pages, alph for alpha lettering (e.g. Appendix maybe)
+% or arabic for standard page numbering. If you want to restart the page
+% counter because you are using a new numbering format, you can use
+% \setcounter{page}{X} where X is the new number you want to count on.
+\pagenumbering{arabic}
+
+% page number on every page
+% \pagestyle{plain}
+\makeatletter
+\let\ps@oldempty\ps@empty
+\renewcommand\ps@empty\ps@plain
+\makeatother
+
+%---------------------%
+% Figure and captions %
+%---------------------%
+\DeclareCaptionLabelSeparator{vert}{ \bf{\textbar} }  % declare a | seperator
+\usepackage[labelfont=bf,labelsep=vert,font=small,margin=0cm]{caption}
+
+% naming figures per chapter sections
+% \renewcommand{\thefigure}{\thechapter.\arabic{figure}}  % figure section delimiters
+% \renewcommand{\thetable}{\thechapter.\arabic{table}}  % table section delimiters
+
+% caption font  spacing
+\captionsetup[figure]{font={stretch=1}} % figure caption spacing
+\captionsetup[table]{font={stretch=1}}  % table caption spacing
+% \captionsetup[subfigure]{justification=raggedright,singlelinecheck=false} % subfigure caption placement
+% \captionsetup[subtable]{justification=raggedright,singlelinecheck=false}  % subtable caption placement
+% \captionsetup{font=footnotesize}
+% \captionsetup{font=doublespacing}
+
+%-------------------------------%
+% Tabular alignments and widths %
+%-------------------------------%
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{L}[1]{>{\arraybackslash}p{#1}}
+\newcolumntype{Q}[1]{>{\arraybackslash}m{#1}}
+\newcolumntype{B}[1]{>{\arraybackslash}b{#1}}
+
+%-------------------------%
+% Math mode & annotations %
+%-------------------------%
+\sisetup{per-mode=symbol} % siunitx modification to add symbols
+\makeatletter % add units after math equations
+\providecommand\add@text{}
+\newcommand\tagaddtext[1]{%
+  \gdef\add@text{#1\gdef\add@text{}}}%
+\renewcommand\tagform@[1]{%
+  \maketag@@@{\llap{\add@text\quad}(\ignorespaces#1\unskip\@@italiccorr)}%
+}
+\makeatother
+
+%----------%
+% Coloring %
+%----------%
+% predefined colors: https://en.wikibooks.org/wiki/LaTeX/Colors#Predefined_colors
+\definecolor{gray}{gray}{0.85}  % define gray
+
+%-----------%
+% Footnotes %
+%-----------%
+% \usepackage[bottom]{footmisc}
+% \newcommand\blfootnote[1]{% % no maker for footnotes
+%  \begingroup
+%  \renewcommand\thefootnote{}\footnote{#1}%
+%  \addtocounter{footnote}{-1}%
+%  \endgroup
+% }
+
+%--------------%
+% Hyphenations %
+%--------------%
+% \hyphenation{thatshouldnot} % prevent hyphenation of specific words
+% \global\hyphenpenalty=100000  % remove all hyphenations
+\sloppy
+
+%----------------------------------------------%
+% Caption setup for list of Figures/Tables TOC %
+%----------------------------------------------%
+% add prefixes to list of figures and tables
+\DeclareCaptionListFormat{figprefix}{#1\figurename~#2}
+\DeclareCaptionListFormat{tabprefix}{#1\tablename~#2}
+\captionsetup[figure]{listformat=figprefix}
+\captionsetup[table]{listformat=tabprefix}
+
+% separate the prefixes made above, hardcode spacing, last argument
+\makeatletter
+     \renewcommand*\l@figure{\@dottedtocline{1}{1em}{6.5em}}
+     \renewcommand*\l@table{\@dottedtocline{1}{1em}{6.5em}}
+\makeatother
+
+%---------------------%
+% Figure naming macro %
+%---------------------%
+\newcommand{\CHAPTER}{Chapter}
+\newcommand{\SECTION}{Section}
+\newcommand{\SSECTION}{Subsection}
+\newcommand{\SSSECTION}{Subsubsection}
+\newcommand{\FIGURE}{Figure}
+\newcommand{\sFIGURE}{Supplementary Figure}
+\newcommand{\TABLE}{Table}
+\newcommand{\sTABLE}{Supplementary Table}
+\newcommand{\EQUATION}{Equation}
+\newcommand{\APPENDIX}{Appendix}
+\newcommand{\figname}[2]{section#1-figure-#2}
+\newcommand{\sfigname}[2]{section#1-suppfigure-#2}
+\newcommand{\tblname}[2]{section#1-table-#2} % cannot use \tablename
+\newcommand{\stblname}[2]{section#1-supptable-#2}
+
+%--------------------------------------%
+% Document specific symbols and macros %
+%--------------------------------------%
+
+%----------------------%
+% Bibliography changes %
+%----------------------%
+% \DefineBibliographyStrings{english}{%
+%   references = {References},
+% }
