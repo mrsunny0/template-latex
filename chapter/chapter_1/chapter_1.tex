@@ -1,0 +1,72 @@
+%***************************************************************************%
+%                                 CHAPTER 1                                 %
+%***************************************************************************%
+\documentclass[../main/main]{subfiles}
+
+%===========================================================================%
+%                               BEGIN DOCUMENT
+%===========================================================================%
+\begin{document}
+\chapter{Name of Chapter 1}
+\label{chapter1}
+
+%===========================================================================%
+% SECTION
+%===========================================================================%
+\section{SECTION}
+\lipsum[1-6]
+
+%===============%
+% FIGURE
+%===============%
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{%
+      \graphicpath{placeholder_300.png}%
+    }
+    \caption[main caption]
+    {
+      \textbf{main caption}\protect\footnotemark.
+      \blindtext
+    }
+    \label{\figname{1}{1}}
+\end{figure}
+\footnotetext{\blindtext}
+
+%===========================================================================%
+% SUPPLEMENTARY
+%===========================================================================%
+\section{SUPPLEMENTARY SECTION}
+\renewcommand{\figurename}{S.Figure}
+\renewcommand{\tablename}{S.Table}
+
+\lipsum[11-15]
+
+%===============%
+% FIGURE
+%===============%
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{%
+      \graphicpath{placeholder_200.png}%
+    }
+    \caption[main caption]
+    {
+      \textbf{main caption}.
+      \blindtext
+    }
+    \label{\figname{1}{2}}
+\end{figure}
+
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+
+%===========================================================================%
+%                                 REFERENCES
+%===========================================================================%
+\printbibliography
+
+%===========================================================================%
+%                                END DOCUMENT
+%===========================================================================%
+\end{document}

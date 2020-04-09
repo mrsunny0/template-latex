@@ -1,0 +1,139 @@
+%===========================================================================%
+%                                  PREAMBLE
+%===========================================================================%
+% declare document class, 12pt, lettersize and article
+% could also be report, however section headers turn into chapters
+\documentclass[12pt,twoside]{report}
+
+% import preamble.sty for packages
+% import refextdoc.sty for subfile crossreferencing
+% note the relative import. Because subfiles (e.g. abstract, introduction, etc.)
+% are located in separate files, for all files to be obtainable by main and subfiles,
+% need to tranverse up to the root directory (../) then back to the appropriate files in /main
+\usepackage{../main/preamble}
+\usepackage{../main/custom}
+\usepackage{../main/refextdoc}
+
+% include subfiles
+\usepackage{subfiles}
+
+% relative imports of images
+% note that graphics path should be encased in {}, ends with / to define directory,
+% and finally separated by , without any lead or lag spaces.
+% therefore graphicsspath should look like \graphiscpath{{abc/},{xyz/},{123/}}
+% spaces in directory names are not recommended, however the the \usepackage[space]{grffile}
+% will attempt to work with directories with spaces
+% \graphicspath{%
+%   {},
+%
+% }
+
+% relative imports for \input
+% typically used for tables which are input'd per chapter/appendix
+% names of input files can be wriBtten as is without the relative path prefix
+% \makeatletter
+%   \def\input@path{%
+%
+%   }
+% \makeatother
+
+% The above macro has some issue if compiled in the main file, as there article
+% are duplicate file paths and conflicts. Rather, create a name macro for the new
+% path and use it in the subfiles
+% very important, need to remove trailing spaces
+% https://tex.stackexchange.com/questions/44059/remove-space-after-command
+\newcommand{\graphicpath}[1]{graphics/#1} % note, not plural
+\newcommand{\tablepath}[1]{tables/#1} % table is already taken
+
+% set bibliography
+% use biblatex and biber backend
+\usepackage[citestyle=numeric,
+  backend=biber,
+  style=numeric-comp,  % cite instances such as 1-5
+  sorting=none,
+  refsection=section,  % section
+  % refsection=chapter,  % chapter
+  doi=false,           % supress digital object identifier
+  isbn=false,          % supress international standard book number
+  url=false	           % suppress url and date of access
+]{biblatex}
+
+% add bibliography paths
+\addbibresource{../preface/bib/example.bib}
+\addbibresource{../chapter_1/bib/example.bib}
+\addbibresource{../chapter_2/bib/example.bib}
+\addbibresource{../chapter_3/bib/example.bib}
+\addbibresource{../appendix_A/bib/example.bib}
+
+%===========================================================================%
+%                               BEGIN DOCUMENT
+%===========================================================================%
+\begin{document}
+
+%------------------
+% Table of Contents
+%------------------
+% Title page
+\input{titlepage}
+\cleardoublepage
+
+% Abstract
+\input{abstract}
+\cleardoublepage
+
+% Acknowledgements
+\pagestyle{empty}
+\input{acknowledgements}
+\cleardoublepage
+
+%------------------
+% Table of Contents
+%------------------
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+
+%===========================================================================%
+%                                  PREFACE
+%===========================================================================%
+\subfile{../preface/preface}
+
+%===========================================================================%
+%                                 CHAPTERS
+%===========================================================================%
+% Chapter 1 -
+\subfile{../chapter_1/chapter_1}
+
+% Chapter 2 -
+\subfile{../chapter_2/chapter_2}
+
+% Chapter 3 -
+\subfile{../chapter_3/chapter_3}
+
+Internal reference in main:
+\ref{ext-\figname{1}{1}}
+\ref{ext-\tblname{1}{1}}
+\ref{ext-\tblname{1}{2}}
+\APPENDIX~\ref{ext-appendix}
+
+%===========================================================================%
+%                                 BIBLIOGRAPHY
+%===========================================================================%
+% \newpage
+% \printbibliography[title=References]
+
+%===========================================================================%
+%                                  APPENDIX
+%===========================================================================%
+\newpage
+\appendix
+
+% Appendix A -
+\subfile{../appendix_A/appendix_A}
+
+%===========================================================================%
+%                                END DOCUMENT
+%===========================================================================%
+\end{document}

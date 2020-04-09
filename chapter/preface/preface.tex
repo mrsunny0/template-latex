@@ -1,0 +1,43 @@
+%***************************************************************************%
+%                                  PREFACE                                  %
+%***************************************************************************%
+\documentclass[../main/main]{subfiles}
+\begin{document}
+
+% change prefix figure numbering/lettering
+\renewcommand{\thefigure}{\Roman{chapter}.\Roman{figure}}
+\renewcommand{\thetable}{\Roman{chapter}.\Roman{table}}
+
+% prefix section heading
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\Roman{chapter}.\Roman{section}}
+\renewcommand{\thesubsection}{\Roman{chapter}.\Roman{section}.\Roman{subsection}}
+
+\chapter{Preface}
+
+%===========================================================================%
+% SECTION
+%===========================================================================%
+\section{Introduction}
+\lipsum[43-4]
+
+%===========================================================================%
+%                                 BIBLIOGRAPHY
+%===========================================================================%
+\printbibliography
+
+%===========================================================================%
+%                                END DOCUMENT
+%===========================================================================%
+% reset chapters back to 1 for subsequent labelled chapters
+\setcounter{chapter}{0}
+
+% change prefix figure numbering/lettering back to arabic
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+
+% prefix section heading
+\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\end{document}
