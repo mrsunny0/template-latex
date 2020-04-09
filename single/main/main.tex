@@ -20,14 +20,14 @@
 % therefore graphicsspath should look like \graphiscpath{{abc/},{xyz/},{123/}}
 % spaces in directory names are not recommended, however the the \usepackage[space]{grffile}
 % will attempt to work with directories with spaces
-\graphicspath{%
-  {../images/}
+\graphicspath{
+  {../graphics/}
 }
 
 % relative imports for \input
 % typically used for tables which are input'd per chapter/appendix
 % names of input files can be wriBtten as is without the relative path prefix
-\makeatletter
+\makeatletter%
   \def\input@path{
     {../tables/}
   }
@@ -104,7 +104,7 @@
       \textbf{main caption}\protect\footnotemark.
       \blindtext
     }
-    % \label{\figname{1,1}}
+    \label{\figname{1}{1}}
 \end{figure}
 \footnotetext{\blindtext}
 
@@ -120,7 +120,7 @@
       \textbf{main caption}.
       \blindtext
   }
-  % \label{\tablename{1,1}}
+  \label{\tblname{1}{1}}
 \end{table}
 
 %~~~~~~~~~~~~~~~%
@@ -135,7 +135,7 @@
       \textbf{main caption}.
       \blindtext
   }
-  % \label{\tablename{1,2}}
+  \label{\tblname{1}{2}}
 \end{table}
 
 %===========================================================================%
@@ -144,9 +144,11 @@
 \section{SECTION-2}
 \lipsum[1]
 \cite{smit54,colu92,gree00,phil99,jame76}
-% \ref{figure:\figname{1,1}}
-% \ref{figure:\tablename{1,1}}
-% \ref{figure:\tablename{1,2}}
+
+\noindent{}References:
+\FIGURE~\ref{\figname{1}{1}},
+\TABLE~\ref{\tblname{1}{1}},
+\TABLE~\ref{\tblname{1}{2}}
 
 %===========================================================================%
 % BIBLIOGRAPHY
