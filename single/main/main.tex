@@ -1,0 +1,175 @@
+%===========================================================================%
+%                                  PREAMBLE
+%===========================================================================%
+% declare document class, 12pt, lettersize and article
+% could also be report, however section headers turn into chapters
+\documentclass[12pt, lettersize]{article}
+
+% import preamble.sty for packages
+% import refextdoc.sty for subfile crossreferencing
+% note the relative import. Because subfiles (e.g. abstract, introduction, etc.)
+% are located in separate files, for all files to be obtainable by main and subfiles,
+% need to tranverse up to the root directory (../) then back to the appropriate files in /main
+\usepackage{preamble}
+\usepackage{custom}
+\usepackage{refextdoc}
+
+% relative imports of images
+% note that graphics path should be encased in {}, ends with / to define directory,
+% and finally separated by , without any lead or lag spaces.
+% therefore graphicsspath should look like \graphiscpath{{abc/},{xyz/},{123/}}
+% spaces in directory names are not recommended, however the the \usepackage[space]{grffile}
+% will attempt to work with directories with spaces
+\graphicspath{%
+  {../images/}
+}
+
+% relative imports for \input
+% typically used for tables which are input'd per chapter/appendix
+% names of input files can be wriBtten as is without the relative path prefix
+\makeatletter
+  \def\input@path{
+    {../tables/}
+  }
+\makeatother
+
+% set bibliography
+% use biblatex and biber backend
+\usepackage[citestyle=numeric,
+  backend=biber,
+  style=numeric-comp,  % cite instances such as 1-5
+  sorting=none,
+  refsection=section,  % section
+  % refsection=chapter,  % chapter
+  doi=false,           % supress digital object identifier
+  isbn=false,          % supress international standard book number
+  url=false	           % suppress url and date of access
+]{biblatex}
+
+% add bibliography paths
+\addbibresource{../bib/example.bib}
+
+%===========================================================================%
+%                               BEGIN DOCUMENT
+%===========================================================================%
+\begin{document}
+
+%------------------
+% Table of Contents
+%------------------
+\input{titlepage}
+\newpage
+
+%------------------
+% Table of Contents
+%------------------
+% \thispagestyle{empty}
+% \tableofcontents
+% \listoffigures
+% \listoftables
+% \newpage
+
+%===========================================================================%
+% ABSTRACT
+%===========================================================================%
+\input{abstract}
+\newpage
+
+%===========================================================================%
+% SECTION
+%===========================================================================%
+\section{SECTION}
+\lipsum[1]
+
+%-----------------------------------------------------------------%
+% SUBSECTION
+%-----------------------------------------------------------------%
+\subsection{SUBSECTION}
+\lipsum[1-2]
+
+%.......................................................%
+% SUBSUBSECTION
+%.......................................................%
+\subsubsection{SUBSUBSECTION}
+\lipsum[1-3]
+
+%===============%
+% FIGURES
+%===============%
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{placeholder_300.png}
+    \caption[main caption]
+    {
+      \textbf{main caption}\protect\footnotemark.
+      \blindtext
+    }
+    \label{figure:}
+\end{figure}
+\footnotetext{\blindtext}
+
+%~~~~~~~~~~~~~~~%
+% TABLES
+%~~~~~~~~~~~~~~~%
+\begin{table}[H]
+  \centering
+  \small
+  \input{example_table}
+  \caption[main caption]
+  {
+      \textbf{main caption}.
+      \blindtext
+  }
+  \label{table:}
+\end{table}
+
+%~~~~~~~~~~~~~~~%
+% TABLES
+%~~~~~~~~~~~~~~~%
+\begin{table}[H]
+  \centering
+  \small
+  \input{complex_table}
+  \caption[main caption]
+  {
+      \textbf{main caption}.
+      \blindtext
+  }
+  \label{table:}
+\end{table}
+
+%===========================================================================%
+% SECTION 2
+%===========================================================================%
+\section{SECTION-2}
+\lipsum[1]
+\cite{smit54,colu92,gree00,phil99,jame76}
+
+%===========================================================================%
+% BIBLIOGRAPHY
+%===========================================================================%
+\newpage
+% use biber engine
+\printbibliography
+
+% manual bib insertion
+% \begin{thebibliography}{99} % means 1 digit of entries (<10)
+% \bibitem{bibref}
+% bib information
+% \end{thebibliography}
+
+%===========================================================================%
+% APPENDIX
+%===========================================================================%
+\newpage
+\appendix
+\section{APPENDIX}
+\lipsum[1]
+
+\subsection{SUB APPENDIX}
+\lipsum[1-2]
+
+%---------------------------------------------------------------------------%
+%								 End Document								%
+%---------------------------------------------------------------------------%
+\end{document}

@@ -1,0 +1,20 @@
+%===========================================================================%
+%                             CROSS REFERENCE
+%===========================================================================%
+\ProvidesPackage{refextdoc}
+
+%===========================================================================%
+% use zref-xr: https://tex.stackexchange.com/questions/77774/undefined-control-sequence-when-cross-referencing-with-xr-hyper
+\usepackage{nameref,zref-xr}
+\zxrsetup{toltxlabel}
+
+% externally reference main document
+\zexternaldocument*[ext-]{../main/main}
+
+%===========================================================================%
+% hyperref and xr conflict: https://tex.stackexchange.com/questions/122976/format-ref-output-from-enumeration-item-to-not-include-section-name
+% \usepackage{xr}
+% \usepackage{xr-hyper}
+
+% externally reference main document
+% \externaldocument[ext-]{../main/main}
