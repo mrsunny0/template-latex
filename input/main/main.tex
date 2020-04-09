@@ -20,16 +20,17 @@
 % therefore graphicsspath should look like \graphiscpath{{abc/},{xyz/},{123/}}
 % spaces in directory names are not recommended, however the the \usepackage[space]{grffile}
 % will attempt to work with directories with spaces
-\graphicspath{
+\graphicspath{%
   {../graphics/}
 }
 
 % relative imports for \input
 % typically used for tables which are input'd per chapter/appendix
 % names of input files can be wriBtten as is without the relative path prefix
-\makeatletter%
+\makeatletter
   \def\input@path{
     {../tables/}
+    {../sections/}
   }
 \makeatother
 
@@ -76,79 +77,18 @@
 \newpage
 
 %===========================================================================%
-% SECTION
+% Sections
 %===========================================================================%
-\section{SECTION}
-\lipsum[1]
+\input{section1}
 
-%-----------------------------------------------------------------%
-% SUBSECTION
-%-----------------------------------------------------------------%
-\subsection{SUBSECTION}
-\lipsum[1-2]
+\input{section2}
 
-%.......................................................%
-% SUBSUBSECTION
-%.......................................................%
-\subsubsection{SUBSUBSECTION}
-\lipsum[1-3]
+\input{section3}
 
-%===============%
-% FIGURES
-%===============%
-\begin{figure}[H]
-  \centering
-    \includegraphics[scale=1]{placeholder_300.png}
-    \caption[main caption]
-    {
-      \textbf{main caption}\protect\footnotemark.
-      \blindtext
-    }
-    \label{\figname{1}{1}}
-\end{figure}
-\footnotetext{\blindtext}
-
-%~~~~~~~~~~~~~~~%
-% TABLES
-%~~~~~~~~~~~~~~~%
-\begin{table}[H]
-  \centering
-  \small
-  \input{example_table}
-  \caption[main caption]
-  {
-      \textbf{main caption}.
-      \blindtext
-  }
-  \label{\tblname{1}{1}}
-\end{table}
-
-%~~~~~~~~~~~~~~~%
-% TABLES
-%~~~~~~~~~~~~~~~%
-\begin{table}[H]
-  \centering
-  \small
-  \input{complex_table}
-  \caption[main caption]
-  {
-      \textbf{main caption}.
-      \blindtext
-  }
-  \label{\tblname{1}{2}}
-\end{table}
-
-%===========================================================================%
-% SECTION 2
-%===========================================================================%
-\section{SECTION-2}
-\lipsum[1]
-\cite{smit54,colu92,gree00,phil99,jame76}
-
-\noindent{}References:
-\FIGURE~\ref{\figname{1}{1}},
-\TABLE~\ref{\tblname{1}{1}},
-\TABLE~\ref{\tblname{1}{2}}
+External reference in main:
+\ref{ext-\figname{1}{1}}
+\ref{ext-\tblname{1}{1}}
+\ref{ext-\tblname{1}{2}}
 
 %===========================================================================%
 % BIBLIOGRAPHY

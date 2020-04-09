@@ -1,0 +1,56 @@
+%===========================================================================%
+%                                  PREAMBLE
+%===========================================================================%
+\documentclass[../main/main]{subfiles}
+
+%===========================================================================%
+%                               BEGIN DOCUMENT
+%===========================================================================%
+\begin{document}
+
+%===========================================================================%
+% SECTION2
+%===========================================================================%
+\section{SECTION2}
+\lipsum[11-14]
+
+\tablepath{example-table}
+
+%~~~~~~~~~~~~~~~%
+% TABLES
+%~~~~~~~~~~~~~~~%
+\begin{table}[H]
+  \centering
+  \small
+  \input{%
+    \tablepath{example-table}%
+  }
+  \caption[main caption]
+  {
+      \textbf{main caption}.
+      \blindtext
+  }
+  \label{\tblname{1}{1}}
+\end{table}
+
+%~~~~~~~~~~~~~~~%
+% TABLES
+%~~~~~~~~~~~~~~~%
+\begin{table}[H]
+  \centering
+  \small
+  \input{%
+    \tablepath{complex-table}%
+  }
+  \caption[main caption]
+  {
+      \textbf{main caption}.
+      \blindtext
+  }
+  \label{\tblname{1}{2}}
+\end{table}
+
+%===========================================================================%
+%                                END DOCUMENT
+%===========================================================================%
+\end{document}

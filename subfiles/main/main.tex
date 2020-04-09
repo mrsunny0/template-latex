@@ -10,9 +10,19 @@
 % note the relative import. Because subfiles (e.g. abstract, introduction, etc.)
 % are located in separate files, for all files to be obtainable by main and subfiles,
 % need to tranverse up to the root directory (../) then back to the appropriate files in /main
+% with new update to subfiles, ../ trick is no longer needed
 \usepackage{preamble}
 \usepackage{custom}
 \usepackage{refextdoc}
+
+% include subfiles
+% this module should be loaded last in the preamble
+% the subfiles package has been updated to now use the import packages
+% to source relative materials per subfile, that being said, grpahicspath and
+% input@path put in the main.tex does not influence the path structure of the subfiles
+% as they are independently encapsulated in their own relative path structure
+% CTAN: http://mirrors.rit.edu/CTAN/macros/latex/contrib/subfiles/subfiles.pdf
+\usepackage{subfiles}
 
 % relative imports of images
 % note that graphics path should be encased in {}, ends with / to define directory,
@@ -20,18 +30,24 @@
 % therefore graphicsspath should look like \graphiscpath{{abc/},{xyz/},{123/}}
 % spaces in directory names are not recommended, however the the \usepackage[space]{grffile}
 % will attempt to work with directories with spaces
-\graphicspath{
-  {../graphics/}
-}
+% \graphicspath{%
+% }
 
 % relative imports for \input
 % typically used for tables which are input'd per chapter/appendix
 % names of input files can be wriBtten as is without the relative path prefix
-\makeatletter%
-  \def\input@path{
-    {../tables/}
-  }
-\makeatother
+% \makeatletter
+%   \def\input@path{%
+%   }
+% \makeatother
+
+% The above macro has some issue if compiled in the main file, as there article
+% are duplicate file paths and conflicts. Rather, create a name macro for the new
+% path and use it in the subfiles
+% very important, need to remove trailing spaces
+% https://tex.stackexchange.com/questions/44059/remove-space-after-command
+\newcommand{\graphicpath}[1]{../graphics/#1} % note, not plural
+\newcommand{\tablepath}[1]{../tables/#1} % table is already taken
 
 % set bibliography
 % use biblatex and biber backend
@@ -76,79 +92,22 @@
 \newpage
 
 %===========================================================================%
-% SECTION
+% Sections
 %===========================================================================%
-\section{SECTION}
-\lipsum[1]
+% Section 1
+\subfile{../sections/section1}
 
-%-----------------------------------------------------------------%
-% SUBSECTION
-%-----------------------------------------------------------------%
-\subsection{SUBSECTION}
-\lipsum[1-2]
+% Section 2
+\subfile{../sections/section2}
 
-%.......................................................%
-% SUBSUBSECTION
-%.......................................................%
-\subsubsection{SUBSUBSECTION}
-\lipsum[1-3]
+% Section 3
+\subfile{../sections/section3}
 
-%===============%
-% FIGURES
-%===============%
-\begin{figure}[H]
-  \centering
-    \includegraphics[scale=1]{placeholder_300.png}
-    \caption[main caption]
-    {
-      \textbf{main caption}\protect\footnotemark.
-      \blindtext
-    }
-    \label{\figname{1}{1}}
-\end{figure}
-\footnotetext{\blindtext}
-
-%~~~~~~~~~~~~~~~%
-% TABLES
-%~~~~~~~~~~~~~~~%
-\begin{table}[H]
-  \centering
-  \small
-  \input{example_table}
-  \caption[main caption]
-  {
-      \textbf{main caption}.
-      \blindtext
-  }
-  \label{\tblname{1}{1}}
-\end{table}
-
-%~~~~~~~~~~~~~~~%
-% TABLES
-%~~~~~~~~~~~~~~~%
-\begin{table}[H]
-  \centering
-  \small
-  \input{complex_table}
-  \caption[main caption]
-  {
-      \textbf{main caption}.
-      \blindtext
-  }
-  \label{\tblname{1}{2}}
-\end{table}
-
-%===========================================================================%
-% SECTION 2
-%===========================================================================%
-\section{SECTION-2}
-\lipsum[1]
-\cite{smit54,colu92,gree00,phil99,jame76}
-
-\noindent{}References:
-\FIGURE~\ref{\figname{1}{1}},
-\TABLE~\ref{\tblname{1}{1}},
-\TABLE~\ref{\tblname{1}{2}}
+External reference in main:
+\ref{ext-\figname{1}{1}}
+\ref{ext-\tblname{1}{1}}
+\ref{ext-\tblname{1}{2}}
+\APPENDIX~\ref{ext-appendix}
 
 %===========================================================================%
 % BIBLIOGRAPHY
@@ -157,22 +116,12 @@
 % use biber engine
 \printbibliography
 
-% manual bib insertion
-% \begin{thebibliography}{99} % means 1 digit of entries (<10)
-% \bibitem{bibref}
-% bib information
-% \end{thebibliography}
-
 %===========================================================================%
 % APPENDIX
 %===========================================================================%
 \newpage
 \appendix
-\section{APPENDIX}
-\lipsum[1]
-
-\subsection{SUB APPENDIX}
-\lipsum[1-2]
+\subfile{../appendix/appendix_A}
 
 %===========================================================================%
 %                                END DOCUMENT
